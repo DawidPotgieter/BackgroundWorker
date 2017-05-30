@@ -22,6 +22,8 @@ Some features you might be interested in :
 * Quite simple to add your own logging provider using Common.Logging (Uses nLog out of the box).
 * Alert generation - All job failures generate an alert that's available both via the UI and the WCF admin endpoint.
 
+* Old url : https://backgroundworker.codeplex.com/
+
 ![](https://github.com/DawidPotgieter/BackgroundWorker/blob/master/docs/Home_ss1.png)
 ![](https://github.com/DawidPotgieter/BackgroundWorker/blob/master/docs/Home_s2.png)
 ![](https://github.com/DawidPotgieter/BackgroundWorker/blob/master/docs/Home_ss3.png)
