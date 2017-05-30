@@ -98,29 +98,29 @@ namespace BackgroundWorkerService.Logic.Implementation.JobStore
 			}
 
 			JobData job = null;
-			job = new JobData
-			{
-				JobType = jobType,
-				Data = data,
-				MetaData = metaData,
-				QueueId = queueId,
-				Schedule = schedule,
-				UniqueId = uniqueId ?? Guid.NewGuid(),
-				AbsoluteTimeout = absoluteTimeout,
-				Status = jobStatus ?? (schedule == null ? JobStatus.Ready : JobStatus.Scheduled),
-				CreatedDate = createdDate ?? DateTime.Now,
-				Id = (jobs.Count > 0 ? jobs.Keys.Max() + 1 : 1),
-				Instance = Environment.MachineName,
-				Application = application,
-				Group = group,
-				Name = name,
-				Description = description,
-				SuppressHistory = suppressHistory,
-				DeleteWhenDone = deleteWhenDone,
-				NextStartTime = (schedule != null ? schedule.GetNextOccurrence() : null),
-			};
 			lock (jobs)
 			{
+				job = new JobData
+				{
+					JobType = jobType,
+					Data = data,
+					MetaData = metaData,
+					QueueId = queueId,
+					Schedule = schedule,
+					UniqueId = uniqueId ?? Guid.NewGuid(),
+					AbsoluteTimeout = absoluteTimeout,
+					Status = jobStatus ?? (schedule == null ? JobStatus.Ready : JobStatus.Scheduled),
+					CreatedDate = createdDate ?? DateTime.Now,
+					Id = (jobs.Count > 0 ? jobs.Keys.Max() + 1 : 1),
+					Instance = Environment.MachineName,
+					Application = application,
+					Group = group,
+					Name = name,
+					Description = description,
+					SuppressHistory = suppressHistory,
+					DeleteWhenDone = deleteWhenDone,
+					NextStartTime = (schedule != null ? schedule.GetNextOccurrence() : null),
+				};
 				jobs.Add(job.Id, job);
 			}
 

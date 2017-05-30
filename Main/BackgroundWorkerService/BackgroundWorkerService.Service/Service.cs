@@ -84,7 +84,7 @@ namespace BackgroundWorkerService.Service
 		/// </remarks>
 		private void SetupAdminAccessPoint()
 		{
-			Admin.IAccessPoint accessPoint = new Admin.AccessPoint(this);
+			Admin.IAccessPoint accessPoint = new Admin.AccessPoint(WorkerService, SettingsProvider);
 			try
 			{
 				accessPointHost = new ServiceHost(accessPoint);
@@ -139,8 +139,6 @@ namespace BackgroundWorkerService.Service
 			try
 			{
 				WorkerService.Start();
-				System.Threading.Thread visualThread = new System.Threading.Thread(LoadForm);
-				visualThread.Start();
 			}
 			catch (Exception ex)
 			{
@@ -199,16 +197,6 @@ namespace BackgroundWorkerService.Service
 		protected override void OnContinue()
 		{
 			WorkerService.Resume();
-		}
-
-		/// <summary>
-		/// Loads the form.
-		/// </summary>
-		public void LoadForm()
-		{
-			System.Windows.Forms.Application.EnableVisualStyles();
-			System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
-			System.Windows.Forms.Application.Run();
 		}
 	}
 }

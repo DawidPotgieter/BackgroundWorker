@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BackgroundWorkerService.Logic")]
+[assembly: AssemblyTitle("BackgroundWorkerService.AzureWorker")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BackgroundWorkerService.Logic")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyProduct("BackgroundWorkerService.AzureWorker")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5f851b0a-8ea0-477e-820f-3697f5e1147b")]
+[assembly: Guid("d23e769b-b9e7-4d50-a78c-16d30f1c3f20")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,8 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.0.0")]
-[assembly: InternalsVisibleTo("BackgroundWorkerService.Service")]
-[assembly: InternalsVisibleTo("BackgroundWorkerService.HostedLogic")]
-[assembly: InternalsVisibleTo("BackgroundWorkerService.AzureWorker")]
-[assembly: AssemblyFileVersionAttribute("2.0.0.6")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
