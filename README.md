@@ -1,7 +1,7 @@
 BackgroundWorkerService is a Windows Service that allows you to execute multiple "Jobs" (each a simple class in .Net) concurrently in a separate process.  The service exposes it's admin interface via wcf so it is easy to control via an external process and it also has a simple UI that it exposes via a built in webserver (Cassini Derivative).
 In addition to this, you can also schedule your jobs to execute at specific times (see a bit later about the scheduling supported).
 
-If you're looking to use this project, you should also be looking at the excellent Quartz scheduler [http://quartznet.sourceforge.net/](http://quartznet.sourceforge.net/), since they have very similar goals in mind.  
+If you're looking to use this project, you should also be looking at the excellent Quartz scheduler [http://quartznet.sourceforge.net/](http://quartznet.sourceforge.net/), since they have very similar goals in mind.  BackgroundWorker focuses on being simpler, more reliable and cleaner code, but doesn't support as many features.
 
 Some features you might be interested in :
 * Firstly, it's designed to be easily extensible using provider patterns everywhere.  However, this shouldn't really be necessary
