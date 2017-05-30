@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Linq2SqlJobStoreDal">
+  <DataContextMoniker Name="/Linq2SqlJobStoreDalDataContext" />
+  <nestedChildShapes>
+    <classShape Id="e698ef0e-e368-4d54-91de-23ed81d2718b" absoluteBounds="1.5, 0.75, 2.75, 4.2708154296875">
+      <DataClassMoniker Name="/Linq2SqlJobStoreDalDataContext/BackgroundWorkerJobExecutionHistory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ddeebb40-1bb8-4b9c-9281-a9759187e0d9" absoluteBounds="1.515, 1.21, 2.7199999999999998, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="871d2fa8-c1bd-477a-b8fb-b5f9acd3a9e1" absoluteBounds="5.5, 0.75, 2.5, 4.6554182942708326">
+      <DataClassMoniker Name="/Linq2SqlJobStoreDalDataContext/BackgroundWorkerJob" />
+      <nestedChildShapes>
+        <elementListCompartment Id="88871abc-d408-4ae6-b96b-83ec90765c8f" absoluteBounds="5.515, 1.21, 2.4699999999999998, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

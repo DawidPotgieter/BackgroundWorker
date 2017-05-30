@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Demo.CallbackTestImpl.CompositeJobCallback" CodeBehind="CompositeJobCallback.svc.cs" %>

@@ -1,0 +1,72 @@
+﻿body 
+{
+	font-family: Verdana;
+}
+
+img
+{
+	padding:2px 2px 2px 2px;
+	vertical-align:middle;
+}
+
+table
+{
+	border-spacing: 0px; /* cellspacing */
+	/*margin: 0 auto;  /* td align-center */
+}
+
+th, td 
+{ 
+	padding: 2px 8px 2px 2px; /* cellpadding */
+	text-align:left;
+	color:white;
+	/*vertical-align: top; /* valign */
+}
+
+th
+{
+	font-size:12pt;
+}
+
+table.default
+{
+	width:100%;
+}
+
+textarea, input[type="text"]
+{
+	width:600px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+select
+{
+	width:603px;
+}
+
+.pagerNumber
+{
+	vertical-align:top;
+	padding:0px 5px 0px 5px;
+	text-decoration:none;
+}
+
+.pagerCurrent
+{
+	padding:0px 5px 0px 5px;
+	vertical-align:top;
+	text-decoration:none;
+	font-weight:bold;
+	color:red;
+}
+
+/* jQueryUI overrrides */
+
+/* Make all the widgets smaller */
+.ui-widget { font-family: Lucida Grande, Lucida Sans, Arial, sans-serif; font-size: 0.8em; }
+
+/* Info and trace widget styles */
+.ui-state-info, .ui-widget-content .ui-state-info, .ui-widget-header .ui-state-info  {border: 1px solid #A6C9E2; background: #EBF5FD; color: #363636; }
+.ui-state-info a, .ui-widget-content .ui-state-info a,.ui-widget-header .ui-state-info a { color: #363636; }

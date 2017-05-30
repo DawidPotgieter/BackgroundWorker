@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1a2d1ff7-5fa1-4ccd-8949-807b76a794d4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/BackgroundWorkerService.Service" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BackgroundWorkerService.xsd" MetadataType="Schema" ID="8b14aa5b-5c91-4cf4-bf42-3c8437827343" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?xsd=xsd2" />
+    <MetadataFile FileName="BackgroundWorkerService1.xsd" MetadataType="Schema" ID="40182cc3-747a-4609-a507-a18c6b4145b3" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?xsd=xsd1" />
+    <MetadataFile FileName="BackgroundWorkerService2.xsd" MetadataType="Schema" ID="b2c07d3c-f4fe-4575-9bba-fd4bf4e5027a" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?xsd=xsd5" />
+    <MetadataFile FileName="AccessPoint.wsdl" MetadataType="Wsdl" ID="2509f5de-b1b7-48bb-bf99-f95c574a3e92" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?wsdl" />
+    <MetadataFile FileName="BackgroundWorkerService3.xsd" MetadataType="Schema" ID="d107f17e-4b43-4af9-83d9-b9d55d4c7082" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?xsd=xsd4" />
+    <MetadataFile FileName="BackgroundWorkerService.wsdl" MetadataType="Wsdl" ID="339f088e-99ba-4a89-aeea-2acd06ac23b2" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?wsdl=wsdl0" />
+    <MetadataFile FileName="BackgroundWorkerService.disco" MetadataType="Disco" ID="63362db8-5201-48b8-8240-90867531a342" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?disco" />
+    <MetadataFile FileName="BackgroundWorkerService4.xsd" MetadataType="Schema" ID="e1b7daee-16e9-4c4c-8727-6d3ad4245db6" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?xsd=xsd0" />
+    <MetadataFile FileName="BackgroundWorkerService5.xsd" MetadataType="Schema" ID="b370d099-e995-4f67-9943-76a56a0fb4ec" SourceId="1" SourceUrl="http://localhost/BackgroundWorkerService.Service?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

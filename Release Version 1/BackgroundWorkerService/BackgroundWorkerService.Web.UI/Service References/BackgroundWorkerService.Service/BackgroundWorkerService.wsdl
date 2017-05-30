@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://backgroundworkerservice" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://backgroundworkerservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://backgroundworkerservice/Imports">
+      <xsd:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd0" namespace="http://backgroundworkerservice" />
+      <xsd:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd2" namespace="http://backgroundworkerservice/DataModel/01/01/12" />
+      <xsd:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" />
+      <xsd:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAccessPoint_GetServiceSettings_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceSettings" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_GetServiceSettings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceSettingsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_GetServiceStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_GetServiceStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_GetJobs_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJobs" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_GetJobs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJobsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_SetJobStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetJobStatus" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_SetJobStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetJobStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_UpdateJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateJob" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_UpdateJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_DeleteJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteJob" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_DeleteJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_GetJobExecutionHistories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJobExecutionHistories" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_GetJobExecutionHistories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJobExecutionHistoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_CreateJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateJob" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_CreateJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_ScheduleJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:ScheduleJob" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_ScheduleJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ScheduleJobResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_RunScheduledJob_InputMessage">
+    <wsdl:part name="parameters" element="tns:RunScheduledJob" />
+  </wsdl:message>
+  <wsdl:message name="IAccessPoint_RunScheduledJob_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RunScheduledJobResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IAccessPoint">
+    <wsdl:operation name="GetServiceSettings">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/GetServiceSettings" message="tns:IAccessPoint_GetServiceSettings_InputMessage" />
+      <wsdl:output wsaw:Action="GetServiceSettings" message="tns:IAccessPoint_GetServiceSettings_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceStatus">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/GetServiceStatus" message="tns:IAccessPoint_GetServiceStatus_InputMessage" />
+      <wsdl:output wsaw:Action="GetServiceStatus" message="tns:IAccessPoint_GetServiceStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJobs">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/GetJobs" message="tns:IAccessPoint_GetJobs_InputMessage" />
+      <wsdl:output wsaw:Action="GetJobs" message="tns:IAccessPoint_GetJobs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetJobStatus">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/SetJobStatus" message="tns:IAccessPoint_SetJobStatus_InputMessage" />
+      <wsdl:output wsaw:Action="SetJobStatus" message="tns:IAccessPoint_SetJobStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateJob">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/UpdateJob" message="tns:IAccessPoint_UpdateJob_InputMessage" />
+      <wsdl:output wsaw:Action="UpdateJob" message="tns:IAccessPoint_UpdateJob_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteJob">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/DeleteJob" message="tns:IAccessPoint_DeleteJob_InputMessage" />
+      <wsdl:output wsaw:Action="DeleteJob" message="tns:IAccessPoint_DeleteJob_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJobExecutionHistories">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/GetJobExecutionHistories" message="tns:IAccessPoint_GetJobExecutionHistories_InputMessage" />
+      <wsdl:output wsaw:Action="GetJobExecutionHistories" message="tns:IAccessPoint_GetJobExecutionHistories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateJob">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/CreateJob" message="tns:IAccessPoint_CreateJob_InputMessage" />
+      <wsdl:output wsaw:Action="CreateJob" message="tns:IAccessPoint_CreateJob_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ScheduleJob">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/ScheduleJob" message="tns:IAccessPoint_ScheduleJob_InputMessage" />
+      <wsdl:output wsaw:Action="ScheduleJob" message="tns:IAccessPoint_ScheduleJob_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RunScheduledJob">
+      <wsdl:input wsaw:Action="http://backgroundworkerservice/IAccessPoint/RunScheduledJob" message="tns:IAccessPoint_RunScheduledJob_InputMessage" />
+      <wsdl:output wsaw:Action="RunScheduledJob" message="tns:IAccessPoint_RunScheduledJob_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

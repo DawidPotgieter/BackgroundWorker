@@ -1,0 +1,52 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="WebUI.Layout" %>
+<%@ Register src="UserControls/Jobs.ascx" tagname="Jobs" tagprefix="BWS" %>
+<asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
+	<asp:ContentPlaceHolder ID="HeadContent" runat="server">
+	</asp:ContentPlaceHolder>
+	<script type="text/javascript">
+		var openDialog;
+
+		$.ajaxSetup({
+			// Disable caching of AJAX responses
+			cache: false
+		});
+
+		$(function () {
+			$("#mainMenu").tabs({
+						show: function() {
+								var sel = $('#mainMenu').tabs('option', 'selected');
+								$("#<%= hidLastTab.ClientID %>").val(sel);
+						},
+						selected: <%= hidLastTab.Value %>
+				}); //Make the top level menu
+		});
+	</script>
+</asp:Content>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+	<asp:ScriptManager ID="aspNetScriptManager" runat="server">
+	</asp:ScriptManager>
+	<asp:HiddenField runat="server" ID="hidLastTab" Value="0" />
+	<div class="page">
+		<header style="padding-bottom:5px">
+			<table class="default ui-corner-all ui-widget-content" style="width:100%;height:60px">
+				<tr>
+					<td style="width:181px;padding-top:4px"><img src="content/images/logo.png" alt="Background Worker Service" /></td>
+					<td class="siteTitle">Background Worker Service</td>
+				</tr>
+			</table>
+		</header>
+		<section>
+			<div id="mainMenu">
+				<ul>
+					<li><a href="#Jobs">Jobs</a></li>
+				</ul>
+				<div id="Jobs">
+					<BWS:Jobs ID="JobsControl" runat="server" />
+				</div>
+			</div>
+			<asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+		</section>
+		<footer>
+		</footer>
+	</div>
+</asp:Content>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{29714011-A3F5-4EC3-A036-D1C7EF62F97C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BackgroundWorkerService.Jobs</RootNamespace>
+    <AssemblyName>BackgroundWorkerService.Jobs</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BasicHttpSoapCallbackJob.cs" />
+    <Compile Include="Contracts\IBasicJobCallback.cs" />
+    <Compile Include="Contracts\ICompositeJobCallback.cs" />
+    <Compile Include="DataModel\BasicHttpCallbackJobMetaData.cs" />
+    <Compile Include="DataModel\ContractType.cs" />
+    <Compile Include="DataModel\CompositeBasicHttpCallbackJobMetaData.cs" />
+    <Compile Include="DataModel\MailSettings.cs" />
+    <Compile Include="DataModel\Request\BasicJobCallbackRequest.cs" />
+    <Compile Include="DataModel\Request\CompositeBasicJobCallbackRequest.cs" />
+    <Compile Include="DataModel\Request\Request.cs" />
+    <Compile Include="DataModel\Response\BasicJobCallbackResponse.cs" />
+    <Compile Include="DataModel\Response\CompositeBasicJobCallbackResponse.cs" />
+    <Compile Include="DataModel\Response\Response.cs" />
+    <Compile Include="DataModel\SerializableException.cs" />
+    <Compile Include="DataModel\SerializableMailMessage.cs" />
+    <Compile Include="DataModel\SerializableMailMessageWrapper.cs" />
+    <Compile Include="DataModel\WebRequestSettings.cs" />
+    <Compile Include="JobBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendMailJob.cs" />
+    <Compile Include="WebRequestJob.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackgroundWorkerService.Logic\BackgroundWorkerService.Logic.csproj">
+      <Project>{7444EF73-05EE-41AC-BCD2-410C74421CFC}</Project>
+      <Name>BackgroundWorkerService.Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

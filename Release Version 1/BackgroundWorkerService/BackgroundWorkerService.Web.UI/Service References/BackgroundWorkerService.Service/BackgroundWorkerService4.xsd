@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://backgroundworkerservice" elementFormDefault="qualified" targetNamespace="http://backgroundworkerservice" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd2" namespace="http://backgroundworkerservice/DataModel/01/01/12" />
+  <xs:element name="GetServiceSettings">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q1:GetServiceSettingsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServiceSettingsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="GetServiceSettingsResult" nillable="true" type="q2:GetServiceSettingsResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServiceStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q3:GetServiceStatusRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetServiceStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="GetServiceStatusResult" nillable="true" type="q4:GetServiceStatusResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetJobs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q5:GetJobsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetJobsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="GetJobsResult" nillable="true" type="q6:GetJobsResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetJobStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q7:SetJobStatusRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetJobStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="SetJobStatusResult" nillable="true" type="q8:SetJobStatusResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q9:UpdateJobRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="UpdateJobResult" nillable="true" type="q10:UpdateJobResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q11:DeleteJobRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="DeleteJobResult" nillable="true" type="q12:DeleteJobResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetJobExecutionHistories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q13:GetJobExecutionHistoriesRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetJobExecutionHistoriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="GetJobExecutionHistoriesResult" nillable="true" type="q14:GetJobExecutionHistoriesResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q15:CreateJobRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="CreateJobResult" nillable="true" type="q16:CreateJobResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScheduleJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q17:ScheduleJobRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ScheduleJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="ScheduleJobResult" nillable="true" type="q18:ScheduleJobResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RunScheduledJob">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="request" nillable="true" type="q19:RunScheduledJobRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RunScheduledJobResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://backgroundworkerservice/DataModel/01/01/12" minOccurs="0" name="RunScheduledJobResult" nillable="true" type="q20:RunScheduledJobResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

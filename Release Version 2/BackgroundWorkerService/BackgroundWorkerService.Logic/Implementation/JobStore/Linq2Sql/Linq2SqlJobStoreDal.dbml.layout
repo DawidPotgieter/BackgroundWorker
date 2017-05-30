@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.625" name="Linq2SqlJobStoreDal">
+  <DataContextMoniker Name="/Linq2SqlJobStoreDalDataContext" />
+  <nestedChildShapes>
+    <classShape Id="5ba58f25-3001-4073-af10-22c1592e07a1" absoluteBounds="5.75, 1.25, 3, 4.4631168619791666">
+      <DataClassMoniker Name="/Linq2SqlJobStoreDalDataContext/BackgroundWorkerJobExecutionHistory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="557664c6-60a8-4169-a68a-96289de68686" absoluteBounds="5.765, 1.71, 2.9699999999999998, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="90c29cde-7a59-496d-8e7b-c4a136452e0e" absoluteBounds="2.625, 1.25, 2, 5.0400211588541657">
+      <DataClassMoniker Name="/Linq2SqlJobStoreDalDataContext/BackgroundWorkerJob" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7435db61-e181-48b0-82fc-faa80bc46f4a" absoluteBounds="2.64, 1.71, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5a3fff0a-202e-4cd0-b56b-eee590ddbad1" absoluteBounds="5.75, 6.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/Linq2SqlJobStoreDalDataContext/BackgroundWorkerAlert" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eaf0131c-4333-4ca8-8101-2ba9ea8fa655" absoluteBounds="5.765, 7.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

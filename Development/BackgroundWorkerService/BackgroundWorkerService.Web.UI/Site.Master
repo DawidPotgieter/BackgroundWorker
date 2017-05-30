@@ -1,0 +1,29 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebUI.SiteMaster" %>
+
+<%@ Register src="UserControls/Jobs.ascx" tagname="Jobs" tagprefix="uc1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head runat="server">
+	<meta charset="utf-8" />
+	<title>Background Worker Service</title>
+	<link href="content/themes/ui-darkness/jquery-ui.css")" rel="stylesheet" type="text/css" />
+	<link href="content/themes/jquery.ui.selectmenu.css")" rel="stylesheet" type="text/css" />
+	<link href="content/backgroundworkerui.css")" rel="stylesheet" type="text/css" /><%--This must be after the jquery ui theme--%>
+	<script src="scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+	<script src="scripts/jquery-ui-1.8.16.min.js")" type="text/javascript"></script>
+	<script src="scripts/json2.js")" type="text/javascript"></script>
+	<script src="scripts/jquery.timers.js")" type="text/javascript"></script>
+	<script src="scripts/jquery.ui.selectmenu.js")" type="text/javascript"></script>
+	<script src="scripts/jquery.ui.timepicker.addon.js")" type="text/javascript"></script>
+	<script src="scripts/global.js")" type="text/javascript"></script>
+	<asp:ContentPlaceHolder ID="HeadContent" runat="server">
+	</asp:ContentPlaceHolder>
+</head>
+<body>
+		<form id="form1" runat="server">
+			<asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+		</form>
+</body>
+</html>

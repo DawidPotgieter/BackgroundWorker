@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://backgroundworkerservice/DataModel/01/01/12" elementFormDefault="qualified" targetNamespace="http://backgroundworkerservice/DataModel/01/01/12" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" />
+  <xs:import schemaLocation="http://localhost/BackgroundWorkerService.Service?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:complexType name="GetServiceSettingsRequest">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GetServiceSettingsRequest" nillable="true" type="tns:GetServiceSettingsRequest" />
+  <xs:complexType name="GetServiceSettingsResponse">
+    <xs:sequence>
+      <xs:element name="Settings" nillable="true" type="tns:Settings" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetServiceSettingsResponse" nillable="true" type="tns:GetServiceSettingsResponse" />
+  <xs:complexType name="Settings">
+    <xs:sequence>
+      <xs:element name="InstanceName" nillable="true" type="xs:string" />
+      <xs:element name="JobStoreSettingsProviderType" nillable="true" type="xs:string" />
+      <xs:element name="JobStoreType" nillable="true" type="xs:string" />
+      <xs:element name="PollFrequency" type="ser:duration" />
+      <xs:element name="Queues" nillable="true" type="tns:ArrayOfQueueSettings" />
+      <xs:element minOccurs="0" name="ShutdownTimeout" nillable="true" type="ser:duration" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Settings" nillable="true" type="tns:Settings" />
+  <xs:complexType name="ArrayOfQueueSettings">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QueueSettings" nillable="true" type="tns:QueueSettings" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQueueSettings" nillable="true" type="tns:ArrayOfQueueSettings" />
+  <xs:complexType name="QueueSettings">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:unsignedByte" />
+      <xs:element name="ThreadCount" type="xs:unsignedInt" />
+      <xs:element name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueueSettings" nillable="true" type="tns:QueueSettings" />
+  <xs:complexType name="GetServiceStatusRequest">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="GetServiceStatusRequest" nillable="true" type="tns:GetServiceStatusRequest" />
+  <xs:complexType name="GetServiceStatusResponse">
+    <xs:sequence>
+      <xs:element name="ServiceStatus" nillable="true" type="tns:ServiceStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetServiceStatusResponse" nillable="true" type="tns:GetServiceStatusResponse" />
+  <xs:complexType name="ServiceStatus">
+    <xs:sequence>
+      <xs:element name="Queues" nillable="true" type="tns:ArrayOfQueueStatus" />
+      <xs:element name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceStatus" nillable="true" type="tns:ServiceStatus" />
+  <xs:complexType name="ArrayOfQueueStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QueueStatus" nillable="true" type="tns:QueueStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQueueStatus" nillable="true" type="tns:ArrayOfQueueStatus" />
+  <xs:complexType name="QueueStatus">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:unsignedByte" />
+      <xs:element name="RunningJobs" type="xs:unsignedInt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QueueStatus" nillable="true" type="tns:QueueStatus" />
+  <xs:complexType name="GetJobsRequest">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Applications" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Groups" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="JobIds" nillable="true" type="q3:ArrayOflong" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" minOccurs="0" name="JobStatuses" nillable="true" type="q4:ArrayOfJobStatus" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="QueueIds" nillable="true" type="q5:ArrayOfunsignedByte" />
+      <xs:element name="Skip" type="xs:unsignedInt" />
+      <xs:element name="Take" type="xs:unsignedInt" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TypeNames" nillable="true" type="q6:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetJobsRequest" nillable="true" type="tns:GetJobsRequest" />
+  <xs:complexType name="GetJobsResponse">
+    <xs:sequence>
+      <xs:element name="Jobs" nillable="true" type="tns:ArrayOfJobData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetJobsResponse" nillable="true" type="tns:GetJobsResponse" />
+  <xs:complexType name="ArrayOfJobData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JobData" nillable="true" type="tns:JobData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJobData" nillable="true" type="tns:ArrayOfJobData" />
+  <xs:complexType name="JobData">
+    <xs:sequence>
+      <xs:element name="AbsoluteTimeout" nillable="true" type="ser:duration" />
+      <xs:element name="Application" nillable="true" type="xs:string" />
+      <xs:element name="CalendarSchedule" nillable="true" type="tns:CalendarSchedule" />
+      <xs:element name="CreatedDate" type="xs:dateTime" />
+      <xs:element name="Data" nillable="true" type="xs:string" />
+      <xs:element name="DeleteWhenDone" type="xs:boolean" />
+      <xs:element name="Description" nillable="true" type="xs:string" />
+      <xs:element name="Group" nillable="true" type="xs:string" />
+      <xs:element name="Id" type="xs:long" />
+      <xs:element name="Instance" nillable="true" type="xs:string" />
+      <xs:element name="JobType" nillable="true" type="xs:string" />
+      <xs:element name="LastEndTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="LastErrorMessage" nillable="true" type="xs:string" />
+      <xs:element name="LastStartTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="MetaData" nillable="true" type="xs:string" />
+      <xs:element name="Name" nillable="true" type="xs:string" />
+      <xs:element name="QueueId" type="xs:int" />
+      <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" name="Status" type="q7:JobStatus" />
+      <xs:element name="SuppressHistory" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JobData" nillable="true" type="tns:JobData" />
+  <xs:complexType name="CalendarSchedule">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Schedule">
+        <xs:sequence>
+          <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DaysOfMonth" nillable="true" type="q8:ArrayOfint" />
+          <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="DaysOfWeek" nillable="true" type="q9:ArrayOfDayOfWeek" />
+          <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DaysOfYear" nillable="true" type="q10:ArrayOfint" />
+          <xs:element minOccurs="0" name="EndDateTime" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="RepeatInterval" nillable="true" type="ser:duration" />
+          <xs:element minOccurs="0" name="StartDailyAt" nillable="true" type="tns:TimeOfDay" />
+          <xs:element name="StartDateTime" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CalendarSchedule" nillable="true" type="tns:CalendarSchedule" />
+  <xs:complexType name="Schedule">
+    <xs:sequence>
+      <xs:element name="ScheduleType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Schedule" nillable="true" type="tns:Schedule" />
+  <xs:complexType name="TimeOfDay">
+    <xs:sequence>
+      <xs:element name="Hour" type="xs:int" />
+      <xs:element name="Minute" type="xs:int" />
+      <xs:element name="Second" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimeOfDay" nillable="true" type="tns:TimeOfDay" />
+  <xs:complexType name="SetJobStatusRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element name="JobId" type="xs:long" />
+      <xs:element minOccurs="0" name="MetaData" nillable="true" type="xs:string" />
+      <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" name="NewStatus" type="q11:JobStatus" />
+      <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" minOccurs="0" name="OldStatus" nillable="true" type="q12:JobStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SetJobStatusRequest" nillable="true" type="tns:SetJobStatusRequest" />
+  <xs:complexType name="SetJobStatusResponse">
+    <xs:sequence>
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SetJobStatusResponse" nillable="true" type="tns:SetJobStatusResponse" />
+  <xs:complexType name="UpdateJobRequest">
+    <xs:sequence>
+      <xs:element name="JobData" nillable="true" type="tns:JobData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateJobRequest" nillable="true" type="tns:UpdateJobRequest" />
+  <xs:complexType name="UpdateJobResponse">
+    <xs:sequence>
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateJobResponse" nillable="true" type="tns:UpdateJobResponse" />
+  <xs:complexType name="DeleteJobRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeleteHistory" type="xs:boolean" />
+      <xs:element name="JobId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteJobRequest" nillable="true" type="tns:DeleteJobRequest" />
+  <xs:complexType name="DeleteJobResponse">
+    <xs:sequence>
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteJobResponse" nillable="true" type="tns:DeleteJobResponse" />
+  <xs:complexType name="GetJobExecutionHistoriesRequest">
+    <xs:sequence>
+      <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Applications" nillable="true" type="q13:ArrayOfstring" />
+      <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Groups" nillable="true" type="q14:ArrayOfstring" />
+      <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="JobIds" nillable="true" type="q15:ArrayOflong" />
+      <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" minOccurs="0" name="JobStatuses" nillable="true" type="q16:ArrayOfJobStatus" />
+      <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="QueueIds" nillable="true" type="q17:ArrayOfunsignedByte" />
+      <xs:element name="Skip" type="xs:unsignedInt" />
+      <xs:element name="Take" type="xs:unsignedInt" />
+      <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TypeNames" nillable="true" type="q18:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetJobExecutionHistoriesRequest" nillable="true" type="tns:GetJobExecutionHistoriesRequest" />
+  <xs:complexType name="GetJobExecutionHistoriesResponse">
+    <xs:sequence>
+      <xs:element name="JobHistories" nillable="true" type="tns:ArrayOfJobExecutionHistory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetJobExecutionHistoriesResponse" nillable="true" type="tns:GetJobExecutionHistoriesResponse" />
+  <xs:complexType name="ArrayOfJobExecutionHistory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="JobExecutionHistory" nillable="true" type="tns:JobExecutionHistory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJobExecutionHistory" nillable="true" type="tns:ArrayOfJobExecutionHistory" />
+  <xs:complexType name="JobExecutionHistory">
+    <xs:sequence>
+      <xs:element name="AbsoluteTimeout" nillable="true" type="ser:duration" />
+      <xs:element name="Application" nillable="true" type="xs:string" />
+      <xs:element name="CreatedDate" type="xs:dateTime" />
+      <xs:element name="Data" nillable="true" type="xs:string" />
+      <xs:element name="Description" nillable="true" type="xs:string" />
+      <xs:element name="EndTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element name="Group" nillable="true" type="xs:string" />
+      <xs:element name="Id" type="xs:long" />
+      <xs:element name="Instance" nillable="true" type="xs:string" />
+      <xs:element name="JobId" type="xs:long" />
+      <xs:element name="JobType" nillable="true" type="xs:string" />
+      <xs:element name="MetaData" nillable="true" type="xs:string" />
+      <xs:element name="Name" nillable="true" type="xs:string" />
+      <xs:element name="QueueId" type="xs:int" />
+      <xs:element name="StartTime" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" name="Status" type="q19:JobStatus" />
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="JobExecutionHistory" nillable="true" type="tns:JobExecutionHistory" />
+  <xs:complexType name="CreateJobRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AbsoluteTimeout" nillable="true" type="ser:duration" />
+      <xs:element minOccurs="0" name="Application" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" nillable="true" type="xs:dateTime" />
+      <xs:element name="Data" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeleteWhenDone" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="xs:string" />
+      <xs:element name="MetaData" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element name="QueueId" type="xs:unsignedByte" />
+      <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BackgroundWorkerService.Service.Admin.DataModel" minOccurs="0" name="Status" nillable="true" type="q20:JobStatus" />
+      <xs:element minOccurs="0" name="SuppressHistory" type="xs:boolean" />
+      <xs:element name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateJobRequest" nillable="true" type="tns:CreateJobRequest" />
+  <xs:complexType name="CreateJobResponse">
+    <xs:sequence>
+      <xs:element name="Job" nillable="true" type="tns:JobData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateJobResponse" nillable="true" type="tns:CreateJobResponse" />
+  <xs:complexType name="ScheduleJobRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:CreateJobRequest">
+        <xs:sequence>
+          <xs:element name="CalendarSchedule" nillable="true" type="tns:CalendarSchedule" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ScheduleJobRequest" nillable="true" type="tns:ScheduleJobRequest" />
+  <xs:complexType name="ScheduleJobResponse">
+    <xs:sequence>
+      <xs:element name="Job" nillable="true" type="tns:JobData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScheduleJobResponse" nillable="true" type="tns:ScheduleJobResponse" />
+  <xs:complexType name="RunScheduledJobRequest">
+    <xs:sequence>
+      <xs:element name="JobId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RunScheduledJobRequest" nillable="true" type="tns:RunScheduledJobRequest" />
+  <xs:complexType name="RunScheduledJobResponse">
+    <xs:sequence>
+      <xs:element name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RunScheduledJobResponse" nillable="true" type="tns:RunScheduledJobResponse" />
+</xs:schema>
