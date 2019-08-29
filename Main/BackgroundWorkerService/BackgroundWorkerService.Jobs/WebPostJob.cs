@@ -11,9 +11,9 @@ using BackgroundWorkerService.Logic.Helpers;
 namespace BackgroundWorkerService.Jobs
 {
 	/// <summary>
-	/// This job simply 'Polls' a using a web GET request.  Use for uptime checking and also to keep your IIS application warmed up.
+	/// This job simply 'Polls' a using a web POST request.  Use for posting
 	/// </summary>
-	public class WebRequestJob : IJob
+	public class WebPostJob : IJob
 	{
 		public JobExecutionResult Execute(string jobData, string metaData)
 		{
@@ -21,13 +21,13 @@ namespace BackgroundWorkerService.Jobs
 
 			try
 			{
-				WebRequestSettings settings = Utils.DeserializeObject<WebRequestSettings>(metaData);
+				WebPostSettings settings = Utils.DeserializeObject<WebPostSettings>(metaData);
 				if (settings == null)
 				{
-					throw new ArgumentException("Metadata does not contain a valid WebRequestSettings serialized object.");
+					throw new ArgumentException("Metadata does not contain a valid WebPostSettings serialized object.");
 				}
 				HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(settings.Url);
-				webRequest.Method = "GET";
+				webRequest.Method = "POST";
 				if (settings.UseDefaultCredentials)
 				{
 					webRequest.UseDefaultCredentials = true;
@@ -49,6 +49,14 @@ namespace BackgroundWorkerService.Jobs
 				}
 
 				JobBuilder.AddRequestHeaders(webRequest, settings.Headers);
+				
+				byte[] postData = new ASCIIEncoding().GetBytes(settings.Content);
+				var length = postData.Length;
+				webRequest.ContentLength = length;
+				if (length > 0)
+				{
+					webRequest.GetRequestStream().Write(postData, 0, length);
+				}
 
 				HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
 				if (webResponse.StatusCode == settings.ExpectedResponseCode)

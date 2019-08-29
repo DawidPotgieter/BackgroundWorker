@@ -7,6 +7,7 @@ using BackgroundWorkerService.Jobs.DataModel;
 using System.Net.Mail;
 using BackgroundWorkerService.Logic.Helpers;
 using System.Net;
+using BackgroundWorkerService.Logic.DataModel;
 
 namespace BackgroundWorkerService.Jobs
 {
@@ -58,7 +59,7 @@ namespace BackgroundWorkerService.Jobs
 			}
 		}
 
-		public static WebRequestSettings GetWebRequestJobMetaData(string url, HttpStatusCode expectedResponseCode, bool useDefaultCredentials, CredentialType? credentialType = null, string username = null, string password = null, string domain = null)
+		public static WebRequestSettings GetWebRequestJobMetaData(string url, HttpStatusCode expectedResponseCode, bool useDefaultCredentials, CredentialType? credentialType = null, string username = null, string password = null, string domain = null, List<WebRequestHeader> headers = null)
 		{
 			return new WebRequestSettings
 			{
@@ -69,7 +70,81 @@ namespace BackgroundWorkerService.Jobs
 				Username = username,
 				Password = password,
 				Domain = domain,
+				Headers = headers
 			};
+		}
+
+		public static WebPostSettings GetWebPostJobMetaData(string url, HttpStatusCode expectedResponseCode, bool useDefaultCredentials, List<WebRequestHeader> headers, string content = "", CredentialType? credentialType = null, string username = null, string password = null, string domain = null)
+		{
+			return new WebPostSettings
+			{
+				Url = url,
+				ExpectedResponseCode = expectedResponseCode,
+				UseDefaultCredentials = useDefaultCredentials,
+				CredentialType = credentialType,
+				Username = username,
+				Password = password,
+				Domain = domain,
+				Headers = headers,
+				Content = content
+			};
+		}
+
+		public static void AddRequestHeaders(HttpWebRequest webRequest, List<WebRequestHeader> headers)
+		{
+			foreach (var header in headers)
+			{
+				switch (header.Header)
+				{
+					case HttpRequestHeader.Accept:
+						webRequest.Accept = header.Value;
+						break;
+					case HttpRequestHeader.Connection:
+						webRequest.Connection = header.Value;
+						break;
+					case HttpRequestHeader.ContentType:
+						webRequest.ContentType = header.Value;
+						break;
+					case HttpRequestHeader.Expect:
+						webRequest.Expect = header.Value;
+						break;
+					case HttpRequestHeader.Date:
+						webRequest.Date = DateTime.Parse(header.Value);
+						break;
+					case HttpRequestHeader.Host:
+						webRequest.Host = header.Value;
+						break;
+					case HttpRequestHeader.IfModifiedSince:
+						webRequest.IfModifiedSince = DateTime.Parse(header.Value);
+						break;
+					case HttpRequestHeader.Range:
+						try
+						{
+							var range = header.Value.Split(',');
+							if (range.Length != 2) throw new Exception("Range header value not formatted as two comma separated integers");
+							var from = int.Parse(range[0]);
+							var to = int.Parse(range[1]);
+							webRequest.AddRange(from, to);
+						}
+						catch (Exception e)
+						{
+							throw new ArgumentException("Range Header Value is invalid. See inner exception for details.", e);
+						}
+						break;
+					case HttpRequestHeader.Referer:
+						webRequest.Referer = header.Value;
+						break;
+					case HttpRequestHeader.TransferEncoding:
+						webRequest.TransferEncoding = header.Value;
+						break;
+					case HttpRequestHeader.UserAgent:
+						webRequest.UserAgent = header.Value;
+						break;
+					default:
+						webRequest.Headers.Add(header.Header, header.Value);
+						break;
+				}
+			}
 		}
 	}
 }
