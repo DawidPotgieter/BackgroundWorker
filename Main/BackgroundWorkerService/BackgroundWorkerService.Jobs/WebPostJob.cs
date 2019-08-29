@@ -11,7 +11,7 @@ using BackgroundWorkerService.Logic.Helpers;
 namespace BackgroundWorkerService.Jobs
 {
 	/// <summary>
-	/// This job simply 'Polls' a using a web POST request.  Use for posting
+	/// This job sends data to an endpoint using a web POST request. Use for polling Post endpoints.
 	/// </summary>
 	public class WebPostJob : IJob
 	{
