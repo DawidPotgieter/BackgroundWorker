@@ -16,6 +16,7 @@ namespace BackgroundWorkerService.Jobs.DataModel
 		public string Username { get; set; }
 		public string Password { get; set; }
 		public string Domain { get; set; }
+		public int TimeoutMilliseconds { get; set; }
 		public List<WebRequestHeader> Headers { get; set; }
 
 		public string Serialize()

@@ -59,7 +59,7 @@ namespace BackgroundWorkerService.Jobs
 			}
 		}
 
-		public static WebRequestSettings GetWebRequestJobMetaData(string url, HttpStatusCode expectedResponseCode, bool useDefaultCredentials, CredentialType? credentialType = null, string username = null, string password = null, string domain = null, List<WebRequestHeader> headers = null)
+		public static WebRequestSettings GetWebRequestJobMetaData(string url, HttpStatusCode expectedResponseCode, bool useDefaultCredentials, CredentialType? credentialType = null, string username = null, string password = null, string domain = null, List<WebRequestHeader> headers = null, int timeoutMilliseconds = 0)
 		{
 			return new WebRequestSettings
 			{
@@ -70,11 +70,12 @@ namespace BackgroundWorkerService.Jobs
 				Username = username,
 				Password = password,
 				Domain = domain,
-				Headers = headers
+				Headers = headers,
+				TimeoutMilliseconds = timeoutMilliseconds
 			};
 		}
 
-		public static WebPostSettings GetWebPostJobMetaData(string url, HttpStatusCode expectedResponseCode, bool useDefaultCredentials, List<WebRequestHeader> headers, string content = "", CredentialType? credentialType = null, string username = null, string password = null, string domain = null)
+		public static WebPostSettings GetWebPostJobMetaData(string url, HttpStatusCode expectedResponseCode, bool useDefaultCredentials, List<WebRequestHeader> headers, string content = "", CredentialType? credentialType = null, string username = null, string password = null, string domain = null, int timeoutMilliseconds = 0)
 		{
 			return new WebPostSettings
 			{
@@ -86,7 +87,8 @@ namespace BackgroundWorkerService.Jobs
 				Password = password,
 				Domain = domain,
 				Headers = headers,
-				Content = content
+				Content = content,
+				TimeoutMilliseconds = timeoutMilliseconds
 			};
 		}
 

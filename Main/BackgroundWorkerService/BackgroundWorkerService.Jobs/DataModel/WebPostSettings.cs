@@ -7,19 +7,11 @@ using BackgroundWorkerService.Logic.Helpers;
 
 namespace BackgroundWorkerService.Jobs.DataModel
 {
-	public class WebPostSettings
+	public class WebPostSettings : WebRequestSettings
 	{
-		public string Url { get; set; }
-		public HttpStatusCode ExpectedResponseCode { get; set; }
-		public bool UseDefaultCredentials { get; set; }
-		public CredentialType? CredentialType { get; set; }
-		public string Username { get; set; }
-		public string Password { get; set; }
-		public string Domain { get; set; }
-		public List<WebRequestHeader> Headers { get; set; }
 		public string Content { get; set; }
 
-		public string Serialize()
+		public new string Serialize()
 		{
 			return Utils.SerializeObject<WebPostSettings>(this);
 		}

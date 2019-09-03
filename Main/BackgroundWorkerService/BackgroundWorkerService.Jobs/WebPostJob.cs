@@ -49,7 +49,12 @@ namespace BackgroundWorkerService.Jobs
 				}
 
 				JobBuilder.AddRequestHeaders(webRequest, settings.Headers);
-				
+
+				if (settings.TimeoutMilliseconds > 0)
+				{
+					webRequest.Timeout = settings.TimeoutMilliseconds;
+				}
+
 				byte[] postData = new ASCIIEncoding().GetBytes(settings.Content);
 				var length = postData.Length;
 				webRequest.ContentLength = length;
