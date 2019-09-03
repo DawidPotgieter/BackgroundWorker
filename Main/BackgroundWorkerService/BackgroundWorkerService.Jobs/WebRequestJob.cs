@@ -50,6 +50,11 @@ namespace BackgroundWorkerService.Jobs
 
 				JobBuilder.AddRequestHeaders(webRequest, settings.Headers);
 
+				if (settings.TimeoutMilliseconds > 0)
+				{
+					webRequest.Timeout = settings.TimeoutMilliseconds;
+				}
+
 				HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
 				if (webResponse.StatusCode == settings.ExpectedResponseCode)
 				{
