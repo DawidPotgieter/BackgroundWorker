@@ -183,7 +183,7 @@
 					}
 					else {
 						openDialog.dialog('close');
-						refreshJobsList();
+						location.reload();
 					}
 				},
 				function (xhr, msg, e) {

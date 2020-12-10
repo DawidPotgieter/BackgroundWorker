@@ -26,8 +26,26 @@ namespace WebUI.UserControls
 		{
 		}
 
+		public string ApplicationName { get; set; }
+
 		private void ShowJobs()
 		{
+			List<CheckBox> statusChecked = new List<CheckBox>
+			{
+				{ Done},
+				{ Ready },
+				{ Scheduled },
+				{ Executing },
+				{ Deleted },
+				{ FailRetry },
+				{ FailAutoRetry },
+				{ ExecutionTimeout },
+				{ Pending },
+				{ Queued },
+				{ ShutdownTimeout },
+				{ Fail },
+			};
+			var selectedStatuses = statusChecked.Where(s => s.Checked == true).ToList();
 			using (AccessPointClient accessPoint = new AccessPointClient())
 			{
 				List<JobData> jobs = new List<JobData>();
@@ -39,8 +57,12 @@ namespace WebUI.UserControls
 						Skip = (uint)jobs.Count,
 						Take = PageSize,
 					}).Jobs;
-					jobs.AddRange(page);
+					var filteredJobs = page.Where(j => statusChecked.Any(sc => sc.Checked == true && sc.ID == j.Status.ToString())).ToList();
+					jobs.AddRange(filteredJobs.Where(j => j.Application == ApplicationName));
+					var notDone = page.Where(x => x.Status != JobStatus.Done).ToList();
+
 				}
+
 				while (page != null && page.Length == PageSize);
 				JobsList.DataSource = jobs;
 				JobsList.DataBind();
@@ -59,8 +81,8 @@ namespace WebUI.UserControls
 				Image deleteButtonImage = e.Item.FindControl("btnDeleteJobImage") as Image;
 
 				history.JobId = job.Id;
-				runButtonImage.Attributes["onclick"] = string.Format("queryRunJob({0});return false;", job.Id);
-				deleteButtonImage.Attributes["onclick"] = string.Format("queryDeleteJob({0});return false;", job.Id);
+				runButtonImage.Attributes["onclick"] = string.Format("queryRunJob({0},'" + ApplicationName + "');return false;", job.Id);
+				deleteButtonImage.Attributes["onclick"] = string.Format("queryDeleteJob({0}, '" + ApplicationName + "');return false;", job.Id);
 			}
 		}
 
@@ -70,6 +92,35 @@ namespace WebUI.UserControls
 		}
 
 		protected void btnRefresh_Click(object sender, ImageClickEventArgs e)
+		{
+			ShowJobs();
+		}
+
+		protected void btnFilterList_Click(object sender, EventArgs e)
+		{
+			using (AccessPointClient accessPoint = new AccessPointClient())
+			{
+				List<JobData> jobs = new List<JobData>();
+				JobData[] page;
+				do
+				{
+					page = accessPoint.GetJobs(new GetJobsRequest
+					{
+						Skip = (uint)jobs.Count,
+						Take = PageSize,
+					}).Jobs;
+					jobs.AddRange(page.Where(j => j.Application == ApplicationName));
+				}
+
+				while (page != null && page.Length == PageSize);
+				JobsList.DataSource = jobs;
+				JobsList.DataBind();
+				JobsListPager.Visible = jobs.Count > JobsListPager.MaximumRows;
+			}
+			lblLastRefresh.Text = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+		}
+
+		protected void StatusCheckChanged(object sender, EventArgs e)
 		{
 			ShowJobs();
 		}
