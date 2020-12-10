@@ -61,7 +61,7 @@
 						}
 						else {
 							openDialog.dialog('close');
-							setTimeout("refreshJobsList()", 1000);
+							location.reload();
 						}
 					},
 					function (xhr, msg, e) {

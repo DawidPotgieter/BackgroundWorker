@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="WebUI.Layout" %>
 <%@ Register src="UserControls/Jobs.ascx" tagname="Jobs" tagprefix="BWS" %>
+<%@ Register Src="~/UserControls/JobsScript.ascx" TagPrefix="BWS" TagName="JobsScript" %>
+
 <asp:Content ID="HeaderContent" ContentPlaceHolderID="HeadContent" runat="server">
 	<asp:ContentPlaceHolder ID="HeadContent" runat="server">
 	</asp:ContentPlaceHolder>
@@ -12,13 +14,15 @@
 		});
 
 		$(function () {
-			$("#mainMenu").tabs({
+			debugger;
+			$("#mainMenuDiv").tabs({
 						show: function() {
-								var sel = $('#mainMenu').tabs('option', 'selected');
+								var sel = $('#mainMenuDiv').tabs('option', 'selected');
 								$("#<%= hidLastTab.ClientID %>").val(sel);
 						},
 						selected: <%= hidLastTab.Value %>
 				}); //Make the top level menu
+			console.log($('#Jobs'));
 			reloadAlertNotifier(); //Load the alert notifier the first time on startup
 		});
 
@@ -52,6 +56,7 @@
 			});
 		}
 	</script>
+	<BWS:JobsScript runat="server" ID="JobsScript" />
 </asp:Content>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 	<asp:ScriptManager ID="aspNetScriptManager" runat="server">
@@ -71,11 +76,11 @@
 			</table>
 		</header>
 		<section>
-			<div id="mainMenu">
-				<ul>
-					<li><a href="#Jobs">Jobs</a></li>
+			<div runat="server" id="mainMenuDiv" clientidmode="Static">
+				<ul runat="server" id="mainMenuUl">
+					<li><a href="#OtherJobs">Other Jobs</a></li>
 				</ul>
-				<div id="Jobs">
+				<div id="OtherJobs">
 					<BWS:Jobs ID="JobsControl" runat="server" />
 				</div>
 			</div>

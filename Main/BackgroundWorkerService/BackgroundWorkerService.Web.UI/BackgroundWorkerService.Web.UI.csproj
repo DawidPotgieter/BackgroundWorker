@@ -24,6 +24,12 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -141,6 +147,7 @@
     <Content Include="UserControls\CalendarSchedule.ascx" />
     <Content Include="UserControls\JobHistory.ascx" />
     <Content Include="UserControls\Jobs.ascx" />
+    <Content Include="UserControls\JobsScript.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -274,6 +281,13 @@
     </Compile>
     <Compile Include="UserControls\Jobs.ascx.designer.cs">
       <DependentUpon>Jobs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\JobsScript.ascx.cs">
+      <DependentUpon>JobsScript.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\JobsScript.ascx.designer.cs">
+      <DependentUpon>JobsScript.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
