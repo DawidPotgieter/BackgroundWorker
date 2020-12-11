@@ -22,7 +22,6 @@
 						},
 						selected: <%= hidLastTab.Value %>
 				}); //Make the top level menu
-			console.log($('#Jobs'));
 			reloadAlertNotifier(); //Load the alert notifier the first time on startup
 		});
 

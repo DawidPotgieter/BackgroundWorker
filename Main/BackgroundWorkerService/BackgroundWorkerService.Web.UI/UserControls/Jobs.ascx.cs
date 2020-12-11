@@ -59,8 +59,6 @@ namespace WebUI.UserControls
 					}).Jobs;
 					var filteredJobs = page.Where(j => statusChecked.Any(sc => sc.Checked == true && sc.ID == j.Status.ToString())).ToList();
 					jobs.AddRange(filteredJobs.Where(j => j.Application == ApplicationName));
-					var notDone = page.Where(x => x.Status != JobStatus.Done).ToList();
-
 				}
 
 				while (page != null && page.Length == PageSize);
