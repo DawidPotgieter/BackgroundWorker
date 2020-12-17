@@ -147,6 +147,7 @@
     <Content Include="UserControls\CalendarSchedule.ascx" />
     <Content Include="UserControls\JobHistory.ascx" />
     <Content Include="UserControls\Jobs.ascx" />
+    <Content Include="UserControls\JobsGroup.ascx" />
     <Content Include="UserControls\JobsScript.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -281,6 +282,13 @@
     </Compile>
     <Compile Include="UserControls\Jobs.ascx.designer.cs">
       <DependentUpon>Jobs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\JobsGroup.ascx.cs">
+      <DependentUpon>JobsGroup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\JobsGroup.ascx.designer.cs">
+      <DependentUpon>JobsGroup.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\JobsScript.ascx.cs">
       <DependentUpon>JobsScript.ascx</DependentUpon>

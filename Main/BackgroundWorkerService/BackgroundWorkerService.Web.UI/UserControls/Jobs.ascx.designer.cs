@@ -150,21 +150,12 @@ namespace WebUI.UserControls
 		protected global::System.Web.UI.WebControls.ImageButton btnRefresh;
 
 		/// <summary>
-		/// JobsList control.
+		/// JobGridsContainer control.
 		/// </summary>
 		/// <remarks>
 		/// Auto-generated field.
 		/// To modify move field declaration from designer file to code-behind file.
 		/// </remarks>
-		protected global::System.Web.UI.WebControls.ListView JobsList;
-
-		/// <summary>
-		/// JobsListPager control.
-		/// </summary>
-		/// <remarks>
-		/// Auto-generated field.
-		/// To modify move field declaration from designer file to code-behind file.
-		/// </remarks>
-		protected global::System.Web.UI.WebControls.DataPager JobsListPager;
+		protected global::System.Web.UI.HtmlControls.HtmlGenericControl JobGridsContainer;
 	}
 }
