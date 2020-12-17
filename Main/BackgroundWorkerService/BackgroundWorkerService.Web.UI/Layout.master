@@ -80,7 +80,7 @@
 					<li><a href="#OtherJobs">Other Jobs</a></li>
 				</ul>
 				<div id="OtherJobs">
-					<BWS:Jobs ID="JobsControl" runat="server" />
+					<BWS:Jobs ID="JobsControl" runat="server" ApplicationName="" />
 				</div>
 			</div>
 			<asp:ContentPlaceHolder ID="MainContent" runat="server"/>

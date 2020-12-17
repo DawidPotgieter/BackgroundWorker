@@ -8,6 +8,8 @@ using System.Web.Services;
 using WebUI.BackgroundWorkerService.Service;
 using WebUI.datamodel;
 using System.Globalization;
+using System.Net;
+using BackgroundWorkerService.Jobs.DataModel;
 
 namespace WebUI
 {
@@ -15,6 +17,12 @@ namespace WebUI
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			foreach (var item in Enum.GetValues(typeof(HttpStatusCode)))
+			{
+				httpStatusCode.Items.Add(new ListItem(item.ToString(), item.ToString()));
+			}
+			httpStatusCode.Items.FindByText("OK").Selected = true;
+
 			if (!IsPostBack)
 			{
 				uniqueId.Text = Guid.NewGuid().ToString();
@@ -29,6 +37,7 @@ namespace WebUI
 				TimeSpan? absoluteTimeoutValue = !string.IsNullOrEmpty(absoluteTimeout) ? (TimeSpan?)TimeSpan.Parse(absoluteTimeout) : null;
 				byte queueIdValue = !string.IsNullOrEmpty(queueId) ? byte.Parse(queueId) : (byte)0;
 				Guid? uniqueIdValue = Helpers.TryParseNullableGuid(uniqueId);
+				string stat = additionalData.First(d => d.Key == "httpStatusCode").Value;
 
 				switch (jobType)
 				{
@@ -42,7 +51,6 @@ namespace WebUI
 						string password = additionalData.First(d => d.Key == "password").Value;
 						string methodName = additionalData.First(d => d.Key == "methodName").Value;
 						bool ignoreCertificateErrors = bool.Parse(additionalData.First(d => d.Key == "ignoreCertificateErrors").Value);
-
 						try
 						{
 							Uri uri = new Uri(callbackUrl);
@@ -95,8 +103,39 @@ namespace WebUI
 							global::BackgroundWorkerService.Jobs.JobBuilder.GetSendMailJobDataAndMetaData(message, null, out data, out metaData);
 						}
 						break;
-				}
 
+					case "BackgroundWorkerService.Jobs.WebRequestJob, BackgroundWorkerService.Jobs":
+					case "BackgroundWorkerService.Jobs.WebPostJob, BackgroundWorkerService.Jobs":
+						string webRequestUrl = "";
+						if (!string.IsNullOrWhiteSpace(additionalData.First(d => d.Key == "webRequestUrl").Value))
+						{
+							webRequestUrl = additionalData.First(d => d.Key == "webRequestUrl").Value;
+						}
+						else
+						{
+							return "Please enter a Url";
+						}
+						string httpStatusCode = additionalData.First(d => d.Key == "httpStatusCode").Value;
+						bool useDefaultCredentials = additionalData.First(d => d.Key == "useDefaultCredentials").Value == "on" ? true : false;
+						string webRequestCredentialType = additionalData.First(d => d.Key == "webRequestCredentialType").Value;
+						string webRequestUsername = additionalData.First(d => d.Key == "webRequestUsername").Value;
+						string webRequestPassword = additionalData.First(d => d.Key == "webRequestPassword").Value;
+						string webRequestDomain = additionalData.First(d => d.Key == "webRequestDomain").Value;
+						string webRequestTimeout = additionalData.First(d => d.Key == "webRequestTimeOut").Value;
+
+						if (jobType == "BackgroundWorkerService.Jobs.WebPostJob, BackgroundWorkerService.Jobs")
+						{
+							string content = additionalData.First(d => d.Key == "webPostJobContent").Value;
+							metaData =
+								global::BackgroundWorkerService.Jobs.JobBuilder.GetWebPostJobMetaData(webRequestUrl, (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), httpStatusCode), useDefaultCredentials, null, content, (CredentialType)Enum.Parse(typeof(CredentialType), webRequestCredentialType), webRequestUsername, webRequestPassword, webRequestDomain, string.IsNullOrWhiteSpace(webRequestTimeout) ? 0 : int.Parse(webRequestTimeout)).Serialize();
+						}
+						else
+						{
+							metaData =
+								global::BackgroundWorkerService.Jobs.JobBuilder.GetWebRequestJobMetaData(webRequestUrl, (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode), httpStatusCode), useDefaultCredentials, (CredentialType)Enum.Parse(typeof(CredentialType), webRequestCredentialType), webRequestUsername, webRequestPassword, webRequestDomain, null, string.IsNullOrWhiteSpace(webRequestTimeout) ? 0 : int.Parse(webRequestTimeout)).Serialize();
+						}
+						break;
+				}
 				CreateNewJob(uniqueIdValue, name, description, data, metaData, jobType, absoluteTimeoutValue, queueIdValue, application, group, suppressHistory, deleteWhenDone, schedule);
 			}
 			catch (Exception ex)
@@ -141,7 +180,7 @@ namespace WebUI
 
 			using (AccessPointClient client = new AccessPointClient())
 			{
-				client.CreateJob(request);
+				var response = client.CreateJob(request);
 			}
 		}
 	}

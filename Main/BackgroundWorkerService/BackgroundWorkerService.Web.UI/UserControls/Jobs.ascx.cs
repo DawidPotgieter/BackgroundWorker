@@ -19,6 +19,7 @@ namespace WebUI.UserControls
 			if (!IsPostBack)
 			{
 				ShowJobs();
+				btnRefresh.OnClientClick = $"refreshJobsList{ApplicationName}();return false;";
 			}
 		}
 
@@ -49,18 +50,32 @@ namespace WebUI.UserControls
 			using (AccessPointClient accessPoint = new AccessPointClient())
 			{
 				List<JobData> jobs = new List<JobData>();
+				var jobsStatusesToShow = statusChecked.Where(sc => sc.Checked).Select(sc => (JobStatus)Enum.Parse(typeof(JobStatus), sc.ID)).ToArray();
 				JobData[] page;
 				do
 				{
-					page = accessPoint.GetJobs(new GetJobsRequest
+					if (!string.IsNullOrWhiteSpace(ApplicationName))
 					{
-						Skip = (uint)jobs.Count,
-						Take = PageSize,
-					}).Jobs;
-					var filteredJobs = page.Where(j => statusChecked.Any(sc => sc.Checked == true && sc.ID == j.Status.ToString())).ToList();
-					jobs.AddRange(filteredJobs.Where(j => j.Application == ApplicationName));
+						page = accessPoint.GetJobs(new GetJobsRequest
+						{
+							Skip = (uint)jobs.Count,
+							Take = PageSize,
+							Applications = new string[] { ApplicationName },
+							JobStatuses = jobsStatusesToShow,
+						}).Jobs;
+						jobs.AddRange(page);
+					}
+					else
+					{
+						page = accessPoint.GetJobs(new GetJobsRequest
+						{
+							Skip = (uint)jobs.Count,
+							Take = PageSize,
+							JobStatuses = jobsStatusesToShow,
+						}).Jobs;
+						jobs.AddRange(page.Where(j => string.IsNullOrWhiteSpace(j.Application)));
+					}
 				}
-
 				while (page != null && page.Length == PageSize);
 				JobsList.DataSource = jobs;
 				JobsList.DataBind();
@@ -77,10 +92,49 @@ namespace WebUI.UserControls
 				JobHistory history = e.Item.FindControl("jobHistoryControl") as JobHistory;
 				Image runButtonImage = e.Item.FindControl("btnRunJobImage") as Image;
 				Image deleteButtonImage = e.Item.FindControl("btnDeleteJobImage") as Image;
+				Image statusIcon = e.Item.FindControl("StatusIcon") as Image;
 
 				history.JobId = job.Id;
 				runButtonImage.Attributes["onclick"] = string.Format("queryRunJob({0},'" + ApplicationName + "');return false;", job.Id);
 				deleteButtonImage.Attributes["onclick"] = string.Format("queryDeleteJob({0}, '" + ApplicationName + "');return false;", job.Id);
+
+				switch ((JobStatus)job.Status)
+				{
+					case JobStatus.Done:
+						statusIcon.ImageUrl = "~/content/images/StatusOK_16x.png";
+						break;
+					case JobStatus.Pending:
+						statusIcon.ImageUrl = "~/content/images/Hourglass_16x.png";
+						break;
+					case JobStatus.Queued:
+						statusIcon.ImageUrl = "~/content/images/BuildQueueCircle_16x.png";
+						break;
+					case JobStatus.Ready:
+						statusIcon.ImageUrl = "~/content/images/StatusReady_16x.png";
+						break;
+					case JobStatus.Scheduled:
+						statusIcon.ImageUrl = "~/content/images/Time_16x.png";
+						break;
+					case JobStatus.Executing:
+						statusIcon.ImageUrl = "~/content/images/Execute_16x.png";
+						break;
+					case JobStatus.Fail:
+					case JobStatus.FailRetry:
+						statusIcon.ImageUrl = "~/content/images/StatusInvalid_16x.png";
+						break;
+					case JobStatus.FailAutoRetry:
+						statusIcon.ImageUrl = "~/content/images/StatusSuppressed_16x.png";
+						break;
+					case JobStatus.ShutdownTimeout:
+						statusIcon.ImageUrl = "~/content/images/StopTime_16x.png";
+						break;
+					case JobStatus.ExecutionTimeout:
+						statusIcon.ImageUrl = "~/content/images/Timeout_16x.png";
+						break;
+					default:
+						statusIcon.ImageUrl = "~/content/images/Job.png";
+						break;
+				}
 			}
 		}
 

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateJob.aspx.cs" Inherits="WebUI.CreateJob" MasterPageFile="~/Site.master" ClientIDMode="Static" %>
 
-<%@ Register src="UserControls/CalendarSchedule.ascx" tagname="CalendarSchedule" tagprefix="BWS" %>
+<%@ Register Src="UserControls/CalendarSchedule.ascx" TagName="CalendarSchedule" TagPrefix="BWS" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 	<script type="text/javascript">
@@ -17,15 +17,20 @@
 			$('#ignoreCertificateErrors').selectmenu();
 			$('#scheduleSelect').buttonset();
 			$('#createButton').button();
+			$('#webRequestCredentialType').selectmenu();
+			$('#httpStatusCode').selectmenu();
 			showJobDataSections('');
 		});
 
 		function showJobDataSections(selectedValue) {
+			debugger;
 			$('#RemoteCallbackJobData').hide();
 			$('#SendMailJobData').hide();
 			$('#GenericJobData').hide();
 			$('#JobDataContainer').hide();
 			$('#JobMetaDataContainer').hide();
+			$('#WebRequestJobData').hide();
+			$('#WebPostJobData').hide();
 			switch (selectedValue) {
 				case "BackgroundWorkerService.Jobs.BasicHttpSoapCallbackJob, BackgroundWorkerService.Jobs":
 					$('#RemoteCallbackJobData').show();
@@ -35,6 +40,15 @@
 				case "BackgroundWorkerService.Jobs.SendMailJob, BackgroundWorkerService.Jobs":
 					$('#JobDataContainer').show();
 					$('#SendMailJobData').show();
+					break;
+				case "BackgroundWorkerService.Jobs.WebRequestJob, BackgroundWorkerService.Jobs":
+					$('#JobDataContainer').show();
+					$('#WebRequestJobData').show();
+					break;
+				case "BackgroundWorkerService.Jobs.WebPostJob, BackgroundWorkerService.Jobs":
+					$('#JobDataContainer').show();
+					$('#WebRequestJobData').show();
+					$('#WebPostJobData').show();
 					break;
 				case "":
 					$('#JobDataContainer').show();
@@ -67,77 +81,124 @@
 		function createJob() {
 			pd = new Array();
 			pd.push(
-			{
-				Key: 'contractType',
-				Value: $('#contractType').val()
-			});
+				{
+					Key: 'contractType',
+					Value: $('#contractType').val()
+				});
 			pd.push(
-			{
-				Key: 'methodName',
-				Value: $('#methodName').val()
-			});
+				{
+					Key: 'methodName',
+					Value: $('#methodName').val()
+				});
 			pd.push(
-			{
-				Key: 'callbackUrl',
-				Value: $('#callbackUrl').val()
-			});
+				{
+					Key: 'callbackUrl',
+					Value: $('#callbackUrl').val()
+				});
 			pd.push(
-			{
-				Key: 'securityMode',
-				Value: $('#securityMode').val()
-			});
+				{
+					Key: 'securityMode',
+					Value: $('#securityMode').val()
+				});
 			pd.push(
-			{
-				Key: 'credentialType',
-				Value: $('#credentialType').val()
-			});
+				{
+					Key: 'credentialType',
+					Value: $('#credentialType').val()
+				});
 			pd.push(
-			{
-				Key: 'domain',
-				Value: $('#domain').val()
-			});
+				{
+					Key: 'domain',
+					Value: $('#domain').val()
+				});
 			pd.push(
-			{
-				Key: 'username',
-				Value: $('#username').val()
-			});
+				{
+					Key: 'username',
+					Value: $('#username').val()
+				});
 			pd.push(
-			{
-				Key: 'password',
-				Value: $('#password').val()
-			});
+				{
+					Key: 'password',
+					Value: $('#password').val()
+				});
 			pd.push(
-			{
-				Key: 'ignoreCertificateErrors',
-				Value: $('#ignoreCertificateErrors').val()
-			});
+				{
+					Key: 'ignoreCertificateErrors',
+					Value: $('#ignoreCertificateErrors').val()
+				});
 
 			pd.push(
-			{
-				Key: 'sendTo',
-				Value: $('#sendTo').val()
-			});
+				{
+					Key: 'sendTo',
+					Value: $('#sendTo').val()
+				});
 			pd.push(
-			{
-				Key: 'sendFrom',
-				Value: $('#sendFrom').val()
-			});
+				{
+					Key: 'sendFrom',
+					Value: $('#sendFrom').val()
+				});
 			pd.push(
-			{
-				Key: 'sendSubject',
-				Value: $('#sendSubject').val()
-			});
+				{
+					Key: 'sendSubject',
+					Value: $('#sendSubject').val()
+				});
 			pd.push(
-			{
-				Key: 'emailBody',
-				Value: $('#emailBody').val()
-			});
+				{
+					Key: 'emailBody',
+					Value: $('#emailBody').val()
+				});
+			pd.push(
+				{
+					Key: 'webRequestUrl',
+					Value: $('#webRequestUrl').val() // Hope its correct from this point.
+				});
+			pd.push(
+				{
+					Key: 'httpStatusCode',
+					Value: $('#httpStatusCode').val()
+				});
+			pd.push(
+				{
+					Key: 'useDefaultCredentials',
+					Value: $('#useDefaultCredentials').val()
+				});
+			pd.push(
+				{
+					Key: 'webRequestCredentialType',
+					Value: $('#webRequestCredentialType').val()
+				});
+			pd.push(
+				{
+					Key: 'webRequestUsername',
+					Value: $('#webRequestUsername').val()
+				});
+			pd.push(
+				{
+					Key: 'webRequestPassword',
+					Value: $('#webRequestPassword').val()
+				});
+			pd.push(
+				{
+					Key: 'webRequestDomain',
+					Value: $('#webRequestDomain').val()
+				});
+			pd.push(
+				{
+					Key: 'webRequestTimeOut',
+					Value: $('#webRequestTimeOut').val()
+				});
+			pd.push(
+				{
+					Key: 'webPostJobContent',
+					Value: $('#webPostJobContent').val()
+				});
+
+
 
 			var sc = null;
 			if (scheduleSelected == 'runSchedule') {
 				var days = new Array();
 				$('#DaysOfTheWeek>input').each(function (index) {
-					if ($(this).attr("checked") == "checked")	{
+					if ($(this).attr("checked") == "checked") {
 						days.push($(this).attr("id"));
 					}
 				});
@@ -162,7 +223,7 @@
 				name: $('#jobName').val(),
 				description: $('#description').val(),
 				data: $('#data').val(),
-				metaData:  $('#metaData').val(),
+				metaData: $('#metaData').val(),
 				jobType: jobType,
 				absoluteTimeout: $('#absoluteTimeout').val(),
 				queueId: $('#queueId').val(),
@@ -193,33 +254,37 @@
 	</script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-	<table style="width:100%;table-layout:fixed;word-wrap:break-word;">
+	<table style="width: 100%; table-layout: fixed; word-wrap: break-word;">
 		<tr>
-			<td class="heading" style="vertical-align:middle;width:240px; min-width:240px;max-width:240px">
-				Job Type :
+			<td class="heading" style="vertical-align: middle; width: 240px; min-width: 240px; max-width: 240px">Job Type :
 			</td>
 			<td>
 				<select id="jobType" onchange="showJobDataSections(this.options[this.selectedIndex].value)">
 					<option value="">Generic</option>
 					<option value="BackgroundWorkerService.Jobs.BasicHttpSoapCallbackJob, BackgroundWorkerService.Jobs">Remote Callback</option>
 					<option value="BackgroundWorkerService.Jobs.SendMailJob, BackgroundWorkerService.Jobs">Send Email</option>
+					<option value="BackgroundWorkerService.Jobs.WebRequestJob, BackgroundWorkerService.Jobs">Web Request</option>
+					<option value="BackgroundWorkerService.Jobs.WebPostJob, BackgroundWorkerService.Jobs">Web Post</option>
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<td class="heading">Unique Id :</td>
-			<td><asp:TextBox ID="uniqueId" runat="server"></asp:TextBox></td>
+			<td>
+				<asp:TextBox ID="uniqueId" runat="server"></asp:TextBox></td>
 		</tr>
 		<tr>
 			<td class="heading">Job Name :</td>
-			<td><input type="text" id="jobName" /></td>
+			<td>
+				<input type="text" id="jobName" /></td>
 		</tr>
 		<tr>
 			<td class="heading">Description :</td>
-			<td><textarea id="description" rows="4" cols="100"></textarea></td>
+			<td>
+				<textarea id="description" rows="4" cols="100"></textarea></td>
 		</tr>
 		<tr>
-			<td class="heading" style="vertical-align:middle">Queue :</td>
+			<td class="heading" style="vertical-align: middle">Queue :</td>
 			<td>
 				<select id="queueId">
 					<option value="0">Thread (Default - No Job Timeout)</option>
@@ -229,8 +294,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="heading" style="vertical-align:middle">
-				Delete When Done :
+			<td class="heading" style="vertical-align: middle">Delete When Done :
 			</td>
 			<td>
 				<select id="deleteWhenDone">
@@ -240,8 +304,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="heading" style="vertical-align:middle">
-				Create History :
+			<td class="heading" style="vertical-align: middle">Create History :
 			</td>
 			<td>
 				<select id="createHistory">
@@ -252,53 +315,62 @@
 		</tr>
 		<tr id="JobDataContainer">
 			<td class="heading">Data :</td>
-			<td><textarea id="data" rows="5" cols="50"></textarea></td>
+			<td>
+				<textarea id="data" rows="5" cols="50"></textarea></td>
 		</tr>
 		<tr id="JobMetaDataContainer">
 			<td class="heading">MetaData :</td>
-			<td><textarea id="metaData" rows="5" cols="50"></textarea></td>
+			<td>
+				<textarea id="metaData" rows="5" cols="50"></textarea></td>
 		</tr>
 		<tr>
 			<td class="heading">Application :</td>
-			<td><input type="text" id="application" /></td>
+			<td>
+				<input type="text" id="application" /></td>
 		</tr>
 		<tr>
 			<td class="heading">Group :</td>
-			<td><input type="text" id="group" /></td>
+			<td>
+				<input type="text" id="group" /></td>
 		</tr>
 		<tr>
-			<td class="heading">Absolute Timeout :</td>
-			<td><input type="text" id="absoluteTimeout" /></td>
-		</tr>
-	</table>
-	<table id="GenericJobData" class="default" style="width:100%;table-layout:fixed;word-wrap:break-word;display:none">
-		<tr>
-			<td class="heading" style="width:240px; min-width:240px;max-width:240px">Type (AssemblyQualified) :</td>
-			<td><input type="text" class="required" id="jobTypeName" /></td>
+			<td class="heading">Absolute Timeout (hh:mm:ss) :</td>
+			<td>
+				<input type="text" id="absoluteTimeout" /></td>
 		</tr>
 	</table>
-	<table id="SendMailJobData" style="width:100%;table-layout:fixed;word-wrap:break-word;display:none">
+	<table id="GenericJobData" class="default" style="width: 100%; table-layout: fixed; word-wrap: break-word; display: none; margin-top:50px">
 		<tr>
-			<td class="heading" style="width: 150px; min-width:150px; max-width:150px">To :</td>
-			<td><input type="text" id="sendTo" /></td>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Type (AssemblyQualified) :</td>
+			<td>
+				<input type="text" class="required" id="jobTypeName" /></td>
+		</tr>
+	</table>
+	<table id="SendMailJobData" style="width: 100%; table-layout: fixed; word-wrap: break-word; display: none; margin-top:50px">
+		<tr>
+			<td class="heading" style="width: 150px; min-width: 150px; max-width: 150px">To :</td>
+			<td style="padding-left:95px">
+				<input type="text" id="sendTo" /></td>
 		</tr>
 		<tr>
 			<td class="heading">From :</td>
-			<td><input type="text" id="sendFrom" /></td>
+			<td style="padding-left:95px">
+				<input type="text" id="sendFrom" /></td>
 		</tr>
 		<tr>
 			<td class="heading">Subject :</td>
-			<td><input type="text" id="sendSubject" /></td>
+			<td style="padding-left:95px">
+				<input type="text" id="sendSubject" /></td>
 		</tr>
 		<tr>
 			<td class="heading">Body :</td>
-			<td><textarea id="emailBody" rows="5" cols="50"></textarea></td>
+			<td style="padding-left:95px">
+				<textarea id="emailBody" rows="5" cols="50"></textarea></td>
 		</tr>
-	</table>		
-	<table id="RemoteCallbackJobData" style="width:100%;table-layout:fixed;word-wrap:break-word;display:none">
+	</table>
+	<table id="RemoteCallbackJobData" style="width: 100%; table-layout: fixed; word-wrap: break-word; display: none; margin-top:50px">
 		<tr>
-			<td class="heading" style="width:240px; min-width:240px;max-width:240px">
-				Contract Type :
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Contract Type :
 			</td>
 			<td>
 				<select id="contractType" onchange="showHideMethodName(this.options[this.selectedIndex].value)">
@@ -307,17 +379,18 @@
 				</select>
 			</td>
 		</tr>
-		<tr id="methodNameRow" style="display:none">
+		<tr id="methodNameRow" style="display: none">
 			<td class="heading">Method Name :</td>
-			<td><input type="text" id="methodName" class="required" /></td>
+			<td>
+				<input type="text" id="methodName" class="required" /></td>
 		</tr>
 		<tr>
 			<td class="heading">Callback Url :</td>
-			<td><input type="text" id="callbackUrl" class="required" /></td>
+			<td>
+				<input type="text" id="callbackUrl" class="required" /></td>
 		</tr>
 		<tr>
-			<td class="heading" style="vertical-align:middle">
-				Security Mode :
+			<td class="heading" style="vertical-align: middle">Security Mode :
 			</td>
 			<td>
 				<select id="securityMode">
@@ -330,8 +403,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="heading" style="vertical-align:middle">
-				Credential Type :
+			<td class="heading" style="vertical-align: middle">Credential Type :
 			</td>
 			<td>
 				<select id="credentialType">
@@ -346,19 +418,21 @@
 		</tr>
 		<tr>
 			<td class="heading">Domain :</td>
-			<td><input type="text" id="domain" /></td>
+			<td>
+				<input type="text" id="domain" /></td>
 		</tr>
 		<tr>
 			<td class="heading">Username :</td>
-			<td><input type="text" id="username" /></td>
+			<td>
+				<input type="text" id="username" /></td>
 		</tr>
 		<tr>
 			<td class="heading">Password :</td>
-			<td><input type="password" id="password" /></td>
+			<td>
+				<input type="password" id="password" /></td>
 		</tr>
 		<tr>
-			<td class="heading" style="vertical-align:middle">
-				Ignore Certificate Errors :
+			<td class="heading" style="vertical-align: middle">Ignore Certificate Errors :
 			</td>
 			<td>
 				<select id="ignoreCertificateErrors">
@@ -368,15 +442,101 @@
 			</td>
 		</tr>
 	</table>
-	<div style="width:100%;padding-top : 15px">
+
+
+
+
+
+	<table id="WebRequestJobData" style="width: 100%; table-layout: fixed; word-wrap: break-word; display: none; padding-top:50px">
+		<tr>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Url :
+			</td>
+			<td>
+				<input type="text" class="required" id="webRequestUrl" />
+			</td>
+		</tr>
+		<tr>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Expected Status Code :
+			</td>
+			<td>
+				<select id="httpStatusCode" runat="server">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Use Default Credentials :
+			</td>
+			<td>
+				<input type="checkbox" id="useDefaultCredentials" />
+			</td>
+		</tr>
+		<tr>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Credential Type :
+			</td>
+			<td>
+				<select id="webRequestCredentialType">
+					<option value="Basic">Basic</option>
+					<option value="Digest">Digest</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Username :
+			</td>
+			<td>
+				<input type="text" id="webRequestUsername" />
+			</td>
+		</tr>
+		<tr>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Password :
+			</td>
+			<td>
+				<input type="password" id="webRequestPassword" />
+			</td>
+		</tr>
+		<tr>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">Domain :
+			</td>
+			<td>
+				<input type="text" id="webRequestDomain" />
+			</td>
+		</tr>
+		<tr>
+			<td class="heading" style="width: 240px; min-width: 240px; max-width: 240px">TimeOut (ms) :
+			</td>
+			<td>
+				<input type="text" id="webRequestTimeOut" />
+			</td>
+		</tr>
+	</table>
+
+
+
+
+
+	<table id="WebPostJobData" style="width: 100%; table-layout: fixed; word-wrap: break-word; display: none; padding-right:350px">
+		<tr>
+			<td class="heading">Content :</td>
+			<td>
+				<textarea id="webPostJobContent" rows="4" cols="100"></textarea>
+			</td>
+		</tr>
+	</table>
+
+
+
+
+	<div style="width: 100%; padding-top: 15px">
 		<div id="scheduleSelect">
 			<input id="runOnce" type="radio" name="scheduleGroup" checked="checked" onclick="scheduleGroupClick(this);" /><label for="runOnce">Run Once</label>
 			<input id="runSchedule" type="radio" name="scheduleGroup" onclick="scheduleGroupClick(this);" /><label for="runSchedule">Schedule</label>
 		</div>
 	</div>
-	<div style="width:100%;display:none" id="scheduleContainer">
-		<p style="width:100%" class="heading">Schedule</p>
+	<div style="width: 100%; display: none" id="scheduleContainer">
+		<p style="width: 100%" class="heading">Schedule</p>
 		<BWS:CalendarSchedule ID="CalendarScheduleControl" runat="server" />
 	</div>
-	<div style="width:100%;padding-top:30px;text-align:right"><input id="createButton" type="button" value="Create" onclick="createJob();" /></div>
+	<div style="width: 100%; padding-top: 30px; text-align: right">
+		<input id="createButton" type="button" value="Create" onclick="createJob();" />
+	</div>
 </asp:Content>

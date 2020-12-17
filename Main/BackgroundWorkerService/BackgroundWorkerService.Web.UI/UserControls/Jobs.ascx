@@ -46,7 +46,7 @@
 				<td style="width: 230px">Last Refresh :
 					<asp:Literal ID="lblLastRefresh" runat="server"></asp:Literal></td>
 				<td style="width: 50px; text-align: right">
-					<asp:ImageButton ID="btnRefresh" runat="server" ToolTip="Refresh" ImageUrl="~/content/images/Refresh.png" OnClick="btnRefresh_Click" OnClientClick="refreshJobsList<%= ApplicationName  %>();return false;" />
+					<asp:ImageButton ID="btnRefresh" runat="server" ToolTip="Refresh" ImageUrl="~/content/images/Refresh.png" OnClick="btnRefresh_Click" />
 				</td>
 				<td style="width: 130px; text-align: right; cursor: pointer" onclick="openDialog = loadPageInPopupDialog('Create Job','CreateJob.aspx');">
 					<img id="btnCreateJob" src="content/images/Add.png" />
@@ -82,7 +82,8 @@
 				<ItemTemplate>
 					<tr class="jobrow">
 						<td style="cursor: pointer" onclick="openDialog = loadPageInPopupDialog('Edit Job','EditJob.aspx?Id=<%# (long)Eval("Id") %>'); return false;">
-							<img src="../content/images/Job.png" alt="Job" /></td>
+							<asp:Image runat="server" ID="StatusIcon" Style="cursor: pointer" />
+						</td>
 						<td style="cursor: pointer" onclick="openDialog = loadPageInPopupDialog('Edit Job','EditJob.aspx?Id=<%# (long)Eval("Id") %>'); return false;">
 							<%# (long)Eval("Id") %>
 						</td>

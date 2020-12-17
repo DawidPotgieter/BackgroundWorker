@@ -18,8 +18,13 @@
 				"RunJob",
 				JSON.stringify({ 'jobId': jobId }),
 				function (msg, status) {
+					var ignorePattern = /^Successfully set job/;
 					if (msg.d.length > 0) {
-						showInformationDialog(msg.d, "Run Job Result", '500', '200', window["refreshJobsList" + applicationName]);
+						if (ignorePattern.test(msg.d)) {
+							window["refreshJobsList" + applicationName]();
+						} else {
+							showInformationDialog(msg.d, "Run Job Result", '500', '200', window["refreshJobsList" + applicationName]);
+						}
 					}
 				},
 				function (xhr, msg, e) {
