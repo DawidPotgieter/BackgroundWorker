@@ -7,27 +7,38 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebUI {
-    
-    
-    public partial class CreateJob {
-        
-        /// <summary>
-        /// uniqueId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox uniqueId;
-        
-        /// <summary>
-        /// CalendarScheduleControl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::WebUI.UserControls.CalendarSchedule CalendarScheduleControl;
-    }
+namespace WebUI
+{
+
+
+	public partial class CreateJob
+	{
+
+		/// <summary>
+		/// uniqueId control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.WebControls.TextBox uniqueId;
+
+		/// <summary>
+		/// httpStatusCode control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::System.Web.UI.HtmlControls.HtmlSelect httpStatusCode;
+
+		/// <summary>
+		/// CalendarScheduleControl control.
+		/// </summary>
+		/// <remarks>
+		/// Auto-generated field.
+		/// To modify move field declaration from designer file to code-behind file.
+		/// </remarks>
+		protected global::WebUI.UserControls.CalendarSchedule CalendarScheduleControl;
+	}
 }

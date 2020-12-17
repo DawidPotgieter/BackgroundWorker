@@ -12,36 +12,37 @@ namespace WebUI
 	public partial class Layout : System.Web.UI.MasterPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
+		
 		{
 			List<string> jobs = new List<string>();
 			using (AccessPointClient accessPoint = new AccessPointClient())
 			{
-				List<string> page;
-				page = accessPoint.GetJobs(new GetJobsRequest
+				var page = accessPoint.GetJobs(new GetJobsRequest
 				{
-					Skip = (uint)jobs.Count,
-					Take = 10,
-				}).Jobs.Select(x => x.Application).ToList();
-				jobs.AddRange(page);
+					Skip = 0,
+					Take = int.MaxValue,
+				});
+
+				jobs.AddRange(page.Jobs.Select(x => x.Application));
 			}
 
 			foreach (string applicationName in jobs.Distinct())
 			{
-				if (applicationName != null)
-				{
-					var tab = new HtmlGenericControl("li");
-					tab.Controls.Add(new HtmlAnchor() { HRef = "#" + applicationName, InnerText = applicationName });
+				if (string.IsNullOrWhiteSpace(applicationName))
+					continue;
+				var tab = new HtmlGenericControl("li");
+				tab.Controls.Add(new HtmlAnchor() { HRef = "#" + applicationName, InnerText = applicationName, ID = "tab" + applicationName });
 
-					mainMenuDiv.FindControl("mainMenuUl").Controls.Add(tab);
+				mainMenuDiv.FindControl("mainMenuUl").Controls.Add(tab);
 
-					var div = new HtmlGenericControl("div");
-					div.Attributes.Add("id", applicationName);
+				var div = new HtmlGenericControl("div");
+				div.Attributes.Add("id", applicationName);
 
-					mainMenuDiv.Controls.Add(div);
-					var control = (WebUI.UserControls.Jobs)Page.LoadControl("~/UserControls/Jobs.ascx");
-					control.ApplicationName = applicationName;
-					div.Controls.Add(control);
-				}
+				mainMenuDiv.Controls.Add(div);
+				var control = (WebUI.UserControls.Jobs)Page.LoadControl("~/UserControls/Jobs.ascx");
+				control.ID = "Jobs_" + applicationName;
+				control.ApplicationName = applicationName;
+				div.Controls.Add(control);
 			}
 		}
 	}
