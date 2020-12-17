@@ -55,7 +55,7 @@ namespace WebUI.UserControls
 				}
 				while (page != null && page.Length == PageSize);
 
-				foreach (string groupName in jobs.Select(j => j.Group).Distinct())
+				foreach (string groupName in jobs.Select(j => j.Group ?? "").Distinct().OrderBy(gn => gn))
 				{
 					var control = (JobsGroup)Page.LoadControl("~/UserControls/JobsGroup.ascx");
 					control.ID = "JobsGroup_" + ApplicationName + "_" + groupName;
