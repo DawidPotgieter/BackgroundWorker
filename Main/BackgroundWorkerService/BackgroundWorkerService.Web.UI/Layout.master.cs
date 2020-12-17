@@ -26,7 +26,7 @@ namespace WebUI
 				jobs.AddRange(page.Jobs.Select(x => x.Application));
 			}
 
-			foreach (string applicationName in jobs.Distinct())
+			foreach (string applicationName in jobs.Distinct().OrderBy(an => an))
 			{
 				if (string.IsNullOrWhiteSpace(applicationName))
 					continue;
